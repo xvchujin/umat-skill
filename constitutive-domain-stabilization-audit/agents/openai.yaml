@@ -1,0 +1,4 @@
+interface:
+  display_name: "本构物理域与稳定化审计"
+  short_description: "区分物理可容许域、数值病态与可追踪稳定化模型变更及其证据"
+  default_prompt: "Use $constitutive-domain-stabilization-audit to review this constitutive-domain stabilization change."

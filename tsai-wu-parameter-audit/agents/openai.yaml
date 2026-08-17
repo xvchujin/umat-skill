@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tsai-Wu 参数审计"
+  short_description: "核查强度、交互系数、材料坐标、阈值、参数槽位和单位闭包"
+  default_prompt: "Use $tsai-wu-parameter-audit to audit these Tsai-Wu parameters and conventions."

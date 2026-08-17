@@ -1,0 +1,4 @@
+interface:
+  display_name: "UMAT 分层验证"
+  short_description: "建立从算子、材料点、单元体到切线和边值问题的证据矩阵"
+  default_prompt: "Use $umat-hierarchical-validation to build a verification matrix for this UMAT."

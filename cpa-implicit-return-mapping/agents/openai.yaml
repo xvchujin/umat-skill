@@ -1,0 +1,4 @@
+interface:
+  display_name: "CPA 隐式返回映射"
+  short_description: "审查一般小应变 CPA 的屈服残差、塑性乘子和联合状态更新"
+  default_prompt: "Use $cpa-implicit-return-mapping to audit this implicit return-mapping algorithm."

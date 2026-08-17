@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tsai-Wu 损伤状态机"
+  short_description: "审计失效触发、方向归因、退化、事件账本和删除状态的事务语义"
+  default_prompt: "Use $tsai-wu-damage-state-machine to audit this Tsai-Wu damage history design."

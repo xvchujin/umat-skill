@@ -1,0 +1,6 @@
+.build/
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+.DS_Store

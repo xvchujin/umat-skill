@@ -1,0 +1,4 @@
+interface:
+  display_name: "显式自适应子步"
+  short_description: "设计 embedded Euler 接受拒绝、局部误差和完整状态推进"
+  default_prompt: "Use $explicit-adaptive-substepping to audit this adaptive constitutive substepping scheme."

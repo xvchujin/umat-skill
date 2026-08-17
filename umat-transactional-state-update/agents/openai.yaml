@@ -1,0 +1,4 @@
+interface:
+  display_name: "UMAT 事务式状态更新"
+  short_description: "把应力、状态、切线、能量和事件封装为原子提交或完整回滚"
+  default_prompt: "Use $umat-transactional-state-update to make this UMAT update transactional."

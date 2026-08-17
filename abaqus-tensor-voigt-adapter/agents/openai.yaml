@@ -1,0 +1,4 @@
+interface:
+  display_name: "Abaqus 张量与 Voigt 适配"
+  short_description: "审计张量、Voigt、剪切因子、材料轴和历史旋转映射"
+  default_prompt: "Use $abaqus-tensor-voigt-adapter to audit this Abaqus tensor and Voigt mapping."

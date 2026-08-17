@@ -1,0 +1,4 @@
+interface:
+  display_name: "软化客观性审计"
+  short_description: "检查局部软化对增量、网格、特征长度、耗散能和结果客观性的依赖"
+  default_prompt: "Use $softening-objectivity-audit to assess increment and mesh objectivity of this softening law."

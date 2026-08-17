@@ -1,0 +1,4 @@
+interface:
+  display_name: "显式屈服交点搜索"
+  short_description: "沿弹性试算路径构造物理区间、验证拓扑并求首个屈服交点"
+  default_prompt: "Use $explicit-alpha-yield-intersection to find the first admissible yield intersection."

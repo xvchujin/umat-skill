@@ -1,0 +1,4 @@
+interface:
+  display_name: "UMAT PROPS 与 STATEV 契约"
+  short_description: "定义和审计材料参数、状态变量、SDV 与重启动的版本化 ABI"
+  default_prompt: "Use $umat-props-statev-contract to audit this PROPS and STATEV layout."
