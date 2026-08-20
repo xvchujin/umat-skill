@@ -1,4 +1,4 @@
 interface:
   display_name: "Hill48 标定与适用性审计"
   short_description: "审计 Hill48 参数语言、材料轴、角向拓扑和模型可表达性"
-  default_prompt: "Use $hill48-yield-calibration-applicability-audit to audit my Hill48 calibration and applicability."
+  default_prompt: "请使用 $hill48-yield-calibration-applicability-audit 审计我的 Hill48 标定、材料轴与适用性。"

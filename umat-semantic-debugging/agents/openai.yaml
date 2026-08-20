@@ -1,4 +1,4 @@
 interface:
   display_name: "UMAT 语义调试"
   short_description: "检查 Fortran 源码完整性、接口数组、候选状态和返回量数据流"
-  default_prompt: "Use $umat-semantic-debugging to locate the first semantic deviation in this UMAT."
+  default_prompt: "请使用 $umat-semantic-debugging 定位该 Fortran UMAT 的首个宿主接口或状态更新语义偏差。"

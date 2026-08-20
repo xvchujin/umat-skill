@@ -1,4 +1,4 @@
 interface:
   display_name: "显式屈服漂移修正"
   short_description: "审计屈服残差、联合修正、回滚和有界失败退出的完整验收流程"
-  default_prompt: "Use $explicit-yield-drift-correction to audit this yield-surface drift correction."
+  default_prompt: "请使用 $explicit-yield-drift-correction 审计这个显式积分的屈服面漂移修正与回滚。"

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$RepositoryRoot = (Split-Path -Parent $PSScriptRoot)
 )
 
@@ -26,6 +26,20 @@ $expectedSkills = @(
     'umat-transactional-state-update',
     'umat-update-mechanism-router'
 ) | Sort-Object
+$allowedPublicFiles = @(
+    '.gitattributes',
+    '.gitignore',
+    'CHANGELOG.md',
+    'PUBLICATION_POLICY.md',
+    'README.md',
+    'SKILL_MANIFEST.tsv',
+    'tools/update-skill-manifest.ps1',
+    'tools/verify-public-release.ps1'
+)
+foreach ($skill in $expectedSkills) {
+    $allowedPublicFiles += "$skill/SKILL.md"
+    $allowedPublicFiles += "$skill/agents/openai.yaml"
+}
 
 $skillDirectories = Get-ChildItem -LiteralPath $repository -Directory |
     Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') } |
@@ -45,13 +59,22 @@ $forbiddenExtensions = @(
     '.for', '.f', '.f90', '.obj', '.dll', '.exe',
     '.inp', '.odb', '.cae', '.jnl', '.msg', '.dat', '.sta', '.log'
 )
-$forbiddenPathSegments = '(?i)(^|[\\/])(transcripts?|corpus|candidates?|source|extensions?|preprocessed|rejected|stage\d[^\\/]*)([\\/]|$)'
+$forbiddenPathSegments = '(?i)(^|[\\/])(\.build|transcripts?|corpus|candidates?|source|extensions?|preprocessed|rejected|stage\d[^\\/]*)([\\/]|$)'
 
 $allFiles = Get-ChildItem -LiteralPath $repository -File -Recurse |
-    Where-Object { $_.FullName -notmatch '[\\/]\.git[\\/]' -and $_.FullName -notmatch '[\\/]\.build[\\/]' }
+    Where-Object { $_.FullName -notmatch '[\\/]\.git[\\/]' }
+
+$buildDirectory = Join-Path $repository '.build'
+if (Test-Path -LiteralPath $buildDirectory) {
+    $errors.Add("Build directory is not permitted in a public release: .build")
+}
 
 foreach ($file in $allFiles) {
     $relative = $file.FullName.Substring($repository.Length + 1)
+    $normalizedRelative = $relative.Replace('\', '/')
+    if ($normalizedRelative -notin $allowedPublicFiles) {
+        $errors.Add("Unexpected public release file: $relative")
+    }
     if ($file.Extension.ToLowerInvariant() -in $forbiddenExtensions) {
         $errors.Add("Forbidden extension: $relative")
     }
@@ -118,12 +141,9 @@ foreach ($directory in $skillDirectories) {
         }
     }
 
-    $relatedSlugs = [regex]::Matches($text, '(?m)^\s+- slug:\s*([^\r\n]+)$') |
-        ForEach-Object { $_.Groups[1].Value.Trim() }
-    foreach ($slug in $relatedSlugs) {
-        if ($slug -notin $expectedSkills) {
-            $errors.Add("Unknown related skill '$slug' in $($directory.Name)/SKILL.md")
-        }
+    $relatedSection = [regex]::Match($text, '(?ms)^## 相关 skills\s*$.*?(?=^## |\z)')
+    if (-not $relatedSection.Success) {
+        $errors.Add("Missing routing section: $($directory.Name)/SKILL.md")
     }
 
     $agentPath = Join-Path $directory.FullName 'agents\openai.yaml'
@@ -144,6 +164,35 @@ foreach ($directory in $skillDirectories) {
     }
 }
 
+$manifestPath = Join-Path $repository 'SKILL_MANIFEST.tsv'
+$manifestFiles = @(
+    foreach ($directory in $skillDirectories) {
+        Get-ChildItem -LiteralPath $directory.FullName -File -Recurse |
+            Where-Object { $_.Name -eq 'SKILL.md' -or $_.FullName.EndsWith('agents\openai.yaml') }
+    }
+) | Sort-Object FullName
+$expectedManifestLines = @("path`tsize_bytes`tsha256")
+foreach ($file in $manifestFiles) {
+    $relative = $file.FullName.Substring($repository.Length + 1).Replace('\', '/')
+    $hash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+    $expectedManifestLines += "$relative`t$($file.Length)`t$hash"
+}
+
+if (-not (Test-Path -LiteralPath $manifestPath)) {
+    $errors.Add('Missing SKILL_MANIFEST.tsv')
+} else {
+    $actualManifestLines = @(Get-Content -LiteralPath $manifestPath -Encoding UTF8)
+    if ($actualManifestLines.Count -ne $expectedManifestLines.Count) {
+        $errors.Add("Manifest row count mismatch: expected $($expectedManifestLines.Count), got $($actualManifestLines.Count)")
+    } else {
+        for ($index = 0; $index -lt $expectedManifestLines.Count; $index++) {
+            if ($actualManifestLines[$index] -cne $expectedManifestLines[$index]) {
+                $errors.Add("Manifest mismatch at line $($index + 1): SKILL_MANIFEST.tsv")
+            }
+        }
+    }
+}
+
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object { Write-Error $_ }
     throw "PUBLIC_RELEASE_VALIDATION=FAIL ERRORS=$($errors.Count)"
@@ -152,3 +201,4 @@ if ($errors.Count -gt 0) {
 Write-Output "PUBLIC_RELEASE_VALIDATION=PASS"
 Write-Output "SKILLS=$($actualSkills.Count)"
 Write-Output "FILES=$($allFiles.Count)"
+Write-Output "MANIFEST_FILES=$($manifestFiles.Count)"

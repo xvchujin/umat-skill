@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$RepositoryRoot = (Split-Path -Parent $PSScriptRoot)
 )
 
@@ -11,7 +11,8 @@ $files = Get-ChildItem -LiteralPath $repository -Directory |
     ForEach-Object {
         Get-ChildItem -LiteralPath $_.FullName -File -Recurse |
             Where-Object { $_.Name -eq 'SKILL.md' -or $_.FullName.EndsWith('agents\openai.yaml') }
-    }
+    } |
+    Sort-Object FullName
 
 $lines = @("path`tsize_bytes`tsha256")
 foreach ($file in $files) {

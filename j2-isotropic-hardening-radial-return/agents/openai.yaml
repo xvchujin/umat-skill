@@ -1,4 +1,4 @@
 interface:
   display_name: "J2 各向同性硬化径向返回"
   short_description: "实现并审查三维小应变 J2 标量硬化的稳健径向返回"
-  default_prompt: "Use $j2-isotropic-hardening-radial-return to audit this J2 isotropic-hardening update."
+  default_prompt: "请使用 $j2-isotropic-hardening-radial-return 审计这个 J2 各向同性硬化径向返回更新。"

@@ -1,4 +1,4 @@
 interface:
   display_name: "DDSDDE 有限差分审计"
   short_description: "对完整离散材料更新逐列验证算法切线、活动集和导数边界"
-  default_prompt: "Use $ddsdde-finite-difference-audit to verify this UMAT tangent by finite differences."
+  default_prompt: "请使用 $ddsdde-finite-difference-audit 用有限差分核验该 UMAT 的完整离散切线 DDSDDE。"

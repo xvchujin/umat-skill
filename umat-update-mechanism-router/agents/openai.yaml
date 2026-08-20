@@ -1,4 +1,4 @@
 interface:
   display_name: "UMAT 更新机制路由"
   short_description: "隔离屈服、流动、硬化、失效、损伤和客观率并选择专用更新器"
-  default_prompt: "Use $umat-update-mechanism-router to route this constitutive-model change to the correct mechanisms."
+  default_prompt: "请使用 $umat-update-mechanism-router 将此次本构模型改动路由到正确的 UMAT 更新机制。"

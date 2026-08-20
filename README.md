@@ -2,7 +2,7 @@
 
 一套面向 Codex 的 Abaqus UMAT/VUMAT 专项 skills，覆盖本构机制路由、返回映射、张量接口、状态事务、损伤审计、切线验证和分层验收。
 
-> 这是公开净化版。仓库不包含书籍、论文全文、PDF、课程逐字材料、视频时间码、OCR 文本、第三方 Fortran 源码、附件、ODB/INP 工程包或内部研究语料。
+**这是公开净化版。** 仓库不包含书籍、论文全文、PDF、课程逐字材料、视频时间码、OCR 文本、第三方 Fortran 源码、附件、ODB/INP 工程包或内部研究语料。
 
 ## 项目目标
 
@@ -49,7 +49,7 @@
   -> 网格、增量、能量与边值问题验收
 ```
 
-具体问题通常只激活一项主责 skill，再按其 `related_skills` 组合相邻审计，不应一次套用全部 18 项。
+具体问题通常只激活一项主责 skill，再按该 skill 的“相关 skills”路由组合相邻审计，不应一次套用全部 18 项。
 
 ## 安装
 
@@ -76,12 +76,21 @@ powershell -ExecutionPolicy Bypass -File .\tools\verify-public-release.ps1
 验证器会检查：
 
 - 18 个 skill 是否齐全且名称与 frontmatter 一致；
-- `related_skills` 是否全部指向仓库内的有效 slug；
+- 每个 skill 是否保留明确的“相关 skills”路由章节；
 - 是否混入禁止的文档、媒体、归档、Abaqus 作业或源码文件；
-- 是否存在转录引用、时间码、外部相对链接、Markdown 引文块或异常大文件；
+- 是否存在构建目录、转录引用、时间码、外部相对链接、Markdown 引文块或异常大文件；
 - 每个 skill 目录是否只包含允许的公开文件。
+- 整个公开发布是否只包含明确允许的根文件、发布工具和 18 个 skill 元数据文件。
 
-`SKILL_MANIFEST.tsv` 记录公开 skill 文件的相对路径、字节数和 SHA-256，可用于安装前完整性核对。
+`SKILL_MANIFEST.tsv` 记录公开 skill 文件的相对路径、字节数和 SHA-256。发布验证会逐行重算并比对清单，避免清单过期或被替换。
+
+修改任何 skill 后，按以下顺序更新：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\update-skill-manifest.ps1
+powershell -ExecutionPolicy Bypass -File .\tools\verify-public-release.ps1
+git diff --check
+```
 
 ## 版权与许可
 

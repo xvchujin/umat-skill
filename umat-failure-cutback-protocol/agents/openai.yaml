@@ -1,4 +1,4 @@
 interface:
   display_name: "UMAT 失败与 Cutback 协议"
   short_description: "设计局部失败分类、完整回滚、失败码和 PNEWDT 宿主握手"
-  default_prompt: "Use $umat-failure-cutback-protocol to design a clean UMAT failure and cutback path."
+  default_prompt: "请使用 $umat-failure-cutback-protocol 设计可靠的 UMAT 局部失败、回滚和 PNEWDT cutback 路径。"
