@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材本构机制路由"
+  short_description: "区分木材压缩塑性、拉剪损伤、删除与离散裂纹的机制职责"
+  default_prompt: "请使用 $wood-cdm-mechanism-router 为这个木材本构问题建立现象、机制、状态和验证责任表。"

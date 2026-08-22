@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材纤维方向场管线"
+  short_description: "将多源木材纤维和年轮数据转为可追溯的积分点正交 L/R/T"
+  default_prompt: "请使用 $wood-fiber-orientation-field-pipeline 审计这些木材方向数据能否生成可信的 Abaqus 积分点 L/R/T 场。"

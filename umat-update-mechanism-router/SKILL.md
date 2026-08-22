@@ -115,7 +115,7 @@ description: |
 ## 相关 skills
 
 - **depends-on**: 无——本 skill 是机制尚未确定时的入口路由器。
-- **contrasts-with**: 无——它不与专用更新器竞争，只负责先分清 `α`、`Δλ` 与 Tsai-Wu `e` 的数学角色。
+- **contrasts-with**: `wood-cdm-mechanism-router`——后者面向木材 L/R/T、压缩压溃、拉剪损伤与连续/离散裂纹分工；非木材或一般更新机制仍由本 skill 主责。
 - **composes-with**: `explicit-alpha-yield-intersection`（显式交点支路）、`cpa-implicit-return-mapping`（隐式塑性支路）、`tsai-wu-parameter-audit`（Tsai-Wu 失效起始支路）。
 
 ---

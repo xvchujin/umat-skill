@@ -22,6 +22,6 @@ foreach ($file in $files) {
 }
 
 $manifest = Join-Path $repository 'SKILL_MANIFEST.tsv'
-[System.IO.File]::WriteAllLines($manifest, $lines, [System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::WriteAllText($manifest, ($lines -join "`n") + "`n", [System.Text.UTF8Encoding]::new($false))
 Write-Output "MANIFEST_FILES=$($files.Count)"
 Write-Output "MANIFEST_PATH=$manifest"

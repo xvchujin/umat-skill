@@ -112,7 +112,7 @@ description: |
 
 - **depends-on**: 无——表示适配器是各本构分支进入数学核心前的公共边界。
 - **contrasts-with**: 无——表示适配与槽位契约是共同前置，不是二选一方案。
-- **composes-with**: `umat-props-statev-contract`、`hill48-yield-calibration-applicability-audit`——前者与本 skill 共同锁定 Abaqus 接口契约；后者在此表示闭包上审计 Hill48 参数和材料轴标定。
+- **composes-with**: `umat-props-statev-contract`、`hill48-yield-calibration-applicability-audit`、`wood-fiber-orientation-field-pipeline`——前者锁定接口契约，Hill48 skill 审计参数与材料轴标定，木材方向场管线提供可追溯的积分点 L/R/T；本 skill 只负责这些方向进入 Abaqus 表示后的数学闭包。
 
 ---
 

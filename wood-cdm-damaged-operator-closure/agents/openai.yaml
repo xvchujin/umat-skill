@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材受损算子闭包"
+  short_description: "审计多方向木材损伤的六维刚度柔度、耦合项、正定性和极限状态"
+  default_prompt: "请使用 $wood-cdm-damaged-operator-closure 检查这个木材损伤模型的六维受损刚度或柔度算子。"

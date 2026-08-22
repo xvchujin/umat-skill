@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材多模式损伤状态机"
+  short_description: "处理木材多方向损伤的并发触发、不可逆历史、原子提交和回滚"
+  default_prompt: "请使用 $wood-cdm-multimode-state-machine 设计这个木材多模式损伤更新的活动集和原子状态机。"

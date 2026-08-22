@@ -1,6 +1,6 @@
 # Abaqus UMAT Skills
 
-一套面向 Codex 的 Abaqus UMAT/VUMAT 专项 skills，覆盖本构机制路由、返回映射、张量接口、状态事务、损伤审计、切线验证和分层验收。
+一套面向 Codex 的 Abaqus UMAT/VUMAT 专项 skills，覆盖本构机制路由、返回映射、张量接口、状态事务、损伤审计、木材连续损伤、空间正则化、切线验证和分层验收。
 
 **这是公开净化版。** 仓库不包含书籍、论文全文、PDF、课程逐字材料、视频时间码、OCR 文本、第三方 Fortran 源码、附件、ODB/INP 工程包或内部研究语料。
 
@@ -14,7 +14,7 @@
 - 不把不同 `PROPS/STATEV` 布局当成可直接重启的同一 ABI；
 - 不在局部求解失败后提交半更新的应力、状态或能量。
 
-## 18 个 skills
+## 25 个 skills
 
 | 类别 | Skill | 主责 |
 |---|---|---|
@@ -36,6 +36,13 @@
 | 语义调试 | `umat-semantic-debugging` | 源码完整性、Fortran 形式、数组边界与宿主数据流 |
 | 切线 | `ddsdde-finite-difference-audit` | 对完整离散更新映射逐列有限差分审计 |
 | 验证 | `umat-hierarchical-validation` | 算子到材料点、单元体、切线和边值问题的证据矩阵 |
+| 木材机制 | `wood-cdm-mechanism-router` | 分流木材压缩塑性、拉剪损伤、删除与离散裂纹 |
+| 木材热力学 | `wood-cdm-thermodynamic-closure` | 自由能、驱动力、不可逆条件、耗散和卸载闭包 |
+| 木材状态 | `wood-cdm-multimode-state-machine` | L/R/T 与剪切模式的并发触发、历史、原子提交和回滚 |
+| 木材算子 | `wood-cdm-damaged-operator-closure` | 多方向损伤的六维刚度/柔度、耦合项和极限状态 |
+| 木材正则化 | `wood-cdm-spatial-regularization-router` | 裂带、非局部、梯度和黏性路线及多网格证据门 |
+| 木材非局部架构 | `wood-cdm-abaqus-nonlocal-architecture-router` | UMAT、UMATHT、UEL 与全局邻域字段的信息闭包 |
+| 木材方向场 | `wood-fiber-orientation-field-pipeline` | 多源方向数据到积分点正交 L/R/T 的可追溯管线 |
 
 ## 推荐使用顺序
 
@@ -49,7 +56,7 @@
   -> 网格、增量、能量与边值问题验收
 ```
 
-具体问题通常只激活一项主责 skill，再按该 skill 的“相关 skills”路由组合相邻审计，不应一次套用全部 18 项。
+具体问题通常只激活一项主责 skill，再按该 skill 的“相关 skills”路由组合相邻审计，不应一次套用全部 25 项。
 
 ## 安装
 
@@ -67,30 +74,48 @@ python C:\Users\<you>\.codex\skills\.system\skill-installer\scripts\install-skil
 
 ## 验证公开内容
 
-在仓库根目录运行：
+跨平台 Python 入口：
+
+```bash
+python tools/update_skill_manifest.py
+python tools/verify_public_release.py
+git diff --check
+```
+
+Windows PowerShell 入口提供同一发布门：
 
 ```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\update-skill-manifest.ps1
 powershell -ExecutionPolicy Bypass -File .\tools\verify-public-release.ps1
+python .\tools\verify_public_release.py
+git diff --check
 ```
 
 验证器会检查：
 
-- 18 个 skill 是否齐全且名称与 frontmatter 一致；
+- 25 个 skill 是否齐全且名称与 frontmatter 一致；
 - 每个 skill 是否保留明确的“相关 skills”路由章节；
 - 是否混入禁止的文档、媒体、归档、Abaqus 作业或源码文件；
 - 是否存在构建目录、转录引用、时间码、外部相对链接、Markdown 引文块或异常大文件；
 - 每个 skill 目录是否只包含允许的公开文件。
-- 整个公开发布是否只包含明确允许的根文件、发布工具和 18 个 skill 元数据文件。
+- 整个公开发布是否只包含明确允许的根文件、发布工具和 25 个 skill 元数据文件。
 
 `SKILL_MANIFEST.tsv` 记录公开 skill 文件的相对路径、字节数和 SHA-256。发布验证会逐行重算并比对清单，避免清单过期或被替换。
 
 修改任何 skill 后，按以下顺序更新：
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\update-skill-manifest.ps1
-powershell -ExecutionPolicy Bypass -File .\tools\verify-public-release.ps1
-git diff --check
-```
+先生成清单，再运行 Python 和 PowerShell 两套验证器，最后执行 `git diff --check`。两套实现必须对 skill 数、文件数和 manifest 数给出一致结果。
+
+## 语言与发布工具
+
+GitHub Languages 图由 Linguist 生成，Markdown、YAML 和 TSV 通常不进入编程语言百分比。早期版本只有两份可识别的 PowerShell 发布脚本，因此页面显示 PowerShell 100%，并不表示 skill 正文是 PowerShell。
+
+仓库现在同时提供有实际用途的 Python 和 PowerShell 工具：
+
+- Python：跨平台生成 `SKILL_MANIFEST.tsv` 并执行公开发布验证，适合 Linux、macOS、Windows 和 CI；
+- PowerShell：保留 Windows 原生入口，并与 Python 检查同一版权 allowlist 和完整性合同。
+
+语言比例只是实现文件的字节统计，不是质量指标；仓库不会为了改变百分比添加无功能占位代码。
 
 ## 版权与许可
 

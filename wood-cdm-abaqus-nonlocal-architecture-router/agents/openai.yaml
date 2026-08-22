@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材非局部 Abaqus 架构"
+  short_description: "在纯 UMAT、UMATHT、UEL 和全局邻域机制间闭合木材非局部字段"
+  default_prompt: "请使用 $wood-cdm-abaqus-nonlocal-architecture-router 审计这个木材非局部损伤方程在 Abaqus 中的字段和载体闭包。"

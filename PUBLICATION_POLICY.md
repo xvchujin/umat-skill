@@ -4,9 +4,9 @@
 
 本仓库只发布以下原创或重新组织的内容：
 
-- 18 个 Codex skill 的触发条件、机制边界、执行步骤和相邻 skill 路由；
-- 18 个 skill 的最小 `agents/openai.yaml` 接口元数据；
-- 本项目的 README、公开内容政策、校验脚本和文件哈希清单。
+- 25 个 Codex skill 的触发条件、机制边界、执行步骤和相邻 skill 路由；
+- 25 个 skill 的最小 `agents/openai.yaml` 接口元数据；
+- 本项目的 README、公开内容政策、Python/PowerShell 校验脚本和文件哈希清单。
 
 ## Excluded
 

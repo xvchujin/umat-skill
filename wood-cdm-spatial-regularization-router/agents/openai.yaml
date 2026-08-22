@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材空间正则化路由"
+  short_description: "在裂带、断裂能、非局部、梯度和黏性方案间审计木材软化客观性"
+  default_prompt: "请使用 $wood-cdm-spatial-regularization-router 为这个木材峰后软化问题选择空间正则化路线和多网格验收矩阵。"

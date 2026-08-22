@@ -1,0 +1,4 @@
+interface:
+  display_name: "木材 CDM 热力学闭包"
+  short_description: "审计木材损伤自由能、驱动力、不可逆条件、耗散和卸载再加载闭包"
+  default_prompt: "请使用 $wood-cdm-thermodynamic-closure 检查这个木材损伤模型的自由能、驱动力和耗散闭包。"

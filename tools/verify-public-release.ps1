@@ -24,7 +24,14 @@ $expectedSkills = @(
     'umat-props-statev-contract',
     'umat-semantic-debugging',
     'umat-transactional-state-update',
-    'umat-update-mechanism-router'
+    'umat-update-mechanism-router',
+    'wood-cdm-abaqus-nonlocal-architecture-router',
+    'wood-cdm-damaged-operator-closure',
+    'wood-cdm-mechanism-router',
+    'wood-cdm-multimode-state-machine',
+    'wood-cdm-spatial-regularization-router',
+    'wood-cdm-thermodynamic-closure',
+    'wood-fiber-orientation-field-pipeline'
 ) | Sort-Object
 $allowedPublicFiles = @(
     '.gitattributes',
@@ -34,7 +41,9 @@ $allowedPublicFiles = @(
     'README.md',
     'SKILL_MANIFEST.tsv',
     'tools/update-skill-manifest.ps1',
-    'tools/verify-public-release.ps1'
+    'tools/update_skill_manifest.py',
+    'tools/verify-public-release.ps1',
+    'tools/verify_public_release.py'
 )
 foreach ($skill in $expectedSkills) {
     $allowedPublicFiles += "$skill/SKILL.md"

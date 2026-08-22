@@ -87,7 +87,7 @@ Job 状态、最后收敛时间、cutback 和切线质量也属于证据；能�
 
 - **depends-on**: `umat-hierarchical-validation`、`tsai-wu-damage-state-machine`——先明确要审计的退化状态律，再把增量、网格和能量检查嵌入独立验证矩阵。
 - **contrasts-with**: 无——它是所有局部软化模型的附加审计门，不是某种损伤演化或固定正则化配方。
-- **composes-with**: 无——其两条真实连接已由 `depends-on` 表达，不再追加宽泛组合边。
+- **composes-with**: `wood-cdm-spatial-regularization-router`——本 skill 提供通用增量/网格/能量客观性门，后者增加木材模式、方向断裂能、裂带拓扑以及非局部/梯度路线选择。
 
 ---
 
