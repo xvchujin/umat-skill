@@ -6,7 +6,7 @@
 
 - 25 个 Codex skill 的触发条件、机制边界、执行步骤和相邻 skill 路由；
 - 25 个 skill 的最小 `agents/openai.yaml` 接口元数据；
-- 本项目的 README、公开内容政策、Python/PowerShell 校验脚本和文件哈希清单。
+- 本项目的 README、开源许可证、公开内容政策、Python/PowerShell 校验脚本和文件哈希清单。
 
 ## Excluded
 
@@ -29,4 +29,4 @@
 
 ## License status
 
-本仓库当前没有开源许可证。除适用法律允许的范围外，未明确授予复制、修改或再分发权。仓库所有者以后选择许可证时，应分别评估 Markdown 内容与 PowerShell 工具是否采用相同或不同许可。
+本仓库中的公开 Markdown 内容、接口元数据与 Python/PowerShell 工具统一采用 [MIT License](LICENSE) 开源许可发布。许可证仅覆盖本仓库实际发布的原创与重新组织内容，不延伸至被排除在外的任何第三方材料。

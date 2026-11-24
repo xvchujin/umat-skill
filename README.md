@@ -119,7 +119,7 @@ GitHub Languages 图由 Linguist 生成，Markdown、YAML 和 TSV 通常不进�
 
 ## 版权与许可
 
-公开内容边界见 [PUBLICATION_POLICY.md](PUBLICATION_POLICY.md)。本仓库当前**未添加开源许可证**；在仓库所有者明确选择许可证前，公开可见不等于授予复制、修改或再分发许可。
+本仓库采用 [MIT License](LICENSE) 开源许可发布；公开内容边界见 [PUBLICATION_POLICY.md](PUBLICATION_POLICY.md)。
 
 ## 工程免责声明
 

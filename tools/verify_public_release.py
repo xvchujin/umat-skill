@@ -44,6 +44,7 @@ ROOT_FILES = {
     ".gitattributes",
     ".gitignore",
     "CHANGELOG.md",
+    "LICENSE",
     "PUBLICATION_POLICY.md",
     "README.md",
     "SKILL_MANIFEST.tsv",
